@@ -14,7 +14,7 @@ const PostBox = ({ data, refreshPage }) => {
 
   const handleDelete = async(id) => {
     try {
-      await deleteDoc(doc(db, "messages", id));
+      await deleteDoc(doc(db, "posts", id));
       refreshPage();
     } catch (error) {
       console.error(error)

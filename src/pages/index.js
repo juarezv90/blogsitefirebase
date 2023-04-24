@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState(null);
-  const postsCollection = collection(db, "messages");
+  const postsCollection = collection(db, "posts");
   const getPosts = async () => {
     try {
       const postsData = await getDocs(postsCollection);
