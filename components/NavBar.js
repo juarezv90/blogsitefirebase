@@ -20,8 +20,8 @@ const NavBar = () => {
     <nav
       className={
         navBar
-          ? "w-full top-0 left-0 p-2 md:p-4 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] fixed bg-slate-500 duration-300"
-          : "w-full top-0 left-0 p-2 md:p-4 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] absolute duration-300"
+          ? "w-full top-0 left-0 py-2 px-10 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] fixed bg-slate-800 duration-300"
+          : "w-full top-0 left-0 py-2 px-10 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] absolute duration-300"
       }
     >
       <h1 className="font-bold text-3xl md:hidden">JDB</h1>
@@ -46,6 +46,12 @@ const NavBar = () => {
           className="relative overflow-hidden after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300"
         >
           About
+        </Link>
+        <Link
+          href="/LoginForm"
+          className="relative overflow-hidden after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300"
+        >
+          Login
         </Link>
       </ul>
     </nav>

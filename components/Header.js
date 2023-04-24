@@ -3,11 +3,13 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="w-full h-[400px] md:h-[600px] duration-300 relative grid p-4">
+    <div className="w-full h-[400px] md:h-[600px] duration-300 relative grid px-4 py-[4rem]">
       <Image
         src={"/assets/header.jpg"}
         fill
         className="object-cover object-center absolute top-0 left-0"
+        priority
+        alt="Blog Header"
       />
       <div className="absolute top-0 left-0 w-full h-full from-black to-slate-400 bg-gradient-to-b opacity-50"></div>
       <div className="w-full h-full z-50 grid md:grid-cols-2 content-center text-white">

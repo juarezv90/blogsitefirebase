@@ -26,7 +26,7 @@ export default function Home() {
   },[])
   return (
    <main className="w-full h-full">
-    {posts !== null && posts.map(element => <PostBox data={element} key={element.date}/>)}
+    {posts !== null && posts.map(element => <PostBox data={element} key={element.id}/>)}
    </main>
   );
 }
