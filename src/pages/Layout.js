@@ -6,10 +6,10 @@ import React from "react";
 
 const Layout = ({ children }) => {
   return (
-    <div className="w-full h-screen flex flex-col min-w-[340px]">
+    <div className="w-full h-screen flex flex-col">
       <NavBar />
       <Header />
-      <div className="flex-grow w-full max-w-[1280px] mx-auto flex flex-col relative" id="main">
+      <div className=" w-full max-w-[1280px] mx-auto flex flex-col relative" id="main">
         {children} 
       </div>
       <Footer />

@@ -1,10 +1,27 @@
 import React from "react";
+import {BsTrashFill} from "react-icons/bs"
+import { useAuth } from "./AuthContext";
+import { collection, doc, deleteDoc } from "firebase/firestore";
+import { db } from "@firebaselib/firebase";
 
-const PostBox = ({ data }) => {
+const PostBox = ({ data, refreshPage }) => {
   const date = data.date.toDate();
   const postDate = `${
     date.getMonth() + 1
   }/${date.getDate()}/${date.getFullYear()}`;
+
+  const {currentUser} = useAuth();
+
+  const handleDelete = async(id) => {
+    try {
+      await deleteDoc(doc(db, "messages", id));
+      refreshPage();
+    } catch (error) {
+      console.error(error)
+    }
+
+    
+  }
 
   return (
     <div className="w-full flex flex-col justify-center items-center md:flex-row gap-2 my-2 p-2">
@@ -21,6 +38,7 @@ const PostBox = ({ data }) => {
             Tags:
             {data.slugs.map((slug, id )=> <p key={id}>#{slug}</p>)}
         </div>
+        {currentUser && <BsTrashFill className="ml-auto mr-5 text-xl" onClick={() => handleDelete(data.id)} />}
       </div>
     </div>
   );
