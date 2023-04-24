@@ -9,8 +9,9 @@ const Layout = ({ children }) => {
     <>
       <NavBar />
       <Header />
-      <div className="w-full h-screen max-w-[1280px] mx-auto flex flex-col relative" id="main">
-        {children}
+      <div className="w-full max-w-[1280px] mx-auto flex flex-col relative" id="main">
+        {children} 
+       
       </div>
       <Footer />
     </>
