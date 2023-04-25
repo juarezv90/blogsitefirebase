@@ -58,6 +58,8 @@ const NavBar = () => {
             Login
           </Link>
         )}
+        {currentUser && <Link href={"/AddPost"} className="relative overflow-hidden after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300">Add Post</Link>}
+        
         {currentUser && <button onClick={() => logout()} className="relative overflow-hidden after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300">Logout</button>}
       </ul>
     </nav>
