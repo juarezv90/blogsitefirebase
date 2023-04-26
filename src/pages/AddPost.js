@@ -6,7 +6,7 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytesResumable
+  uploadBytesResumable,
 } from "firebase/storage";
 import { useRouter } from "next/router";
 
@@ -14,7 +14,7 @@ const initState = {
   post: "",
   title: "",
   slugs: [],
-  postImage: ""
+  postImage: "",
 };
 
 const AddPost = () => {
@@ -23,7 +23,6 @@ const AddPost = () => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const { currentUser } = useAuth();
-
 
   const router = useRouter();
   function redirect() {
@@ -49,7 +48,7 @@ const AddPost = () => {
   const handleSubmit = async () => {
     const docRef = collection(db, "posts");
 
-    if (post.title == "" || post.post == ""  || imageURL== null)  {
+    if (post.title == "" || post.post == "" || imageURL == null) {
       setError("Please Check your Post is valid");
       return;
     }
@@ -59,7 +58,7 @@ const AddPost = () => {
         ...post,
         date: Timestamp.now(),
         userId: currentUser.uid,
-        postImage: imageURL
+        postImage: imageURL,
       });
     } catch (error) {
       setError(error);
@@ -77,7 +76,6 @@ const AddPost = () => {
     upload;
     setImageURL(await getDownloadURL(storageRef));
   };
-
   setTimeout(() => {
     setError(null);
   }, 5000);

@@ -1,4 +1,5 @@
 import { useAuth } from "@components/AuthContext";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const LoginForm = () => {
@@ -8,6 +9,11 @@ const LoginForm = () => {
   const [error, setError] = useState(null);
 
   const { login, signUp, currentUser, logout } = useAuth();
+
+  const router = useRouter();
+  const handleRedirect = () => {
+    router.push("/");
+  };
 
   async function submitHandler() {
     if (!email || !password) {
@@ -45,7 +51,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="flex-1 w-full md:w-[65ch] md:h-[40vh] mx-auto flex flex-col justify-center items-start gap-2 my-10 border p-10 md:rounded-lg border-slate-500 bg-slate-700 text-white">
+      <div className="w-full md:w-[65ch] md:h-[40vh] md:flex-grow-0 mx-auto flex flex-col flex-1 justify-center items-start gap-2 md:my-10 border p-10 md:rounded-lg border-slate-500 bg-slate-700 text-white">
         {!currentUser && (
           <>
             <h1 className="font-bold text-2xl md:text-4xl">
@@ -67,12 +73,12 @@ const LoginForm = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className="w-full flex gap-2 mt-4">
-              <button
+              {/* <button
                 className="border px-4 rounded py-1 text-lg hover:bg-slate-500 hover:text-white duration-300"
                 onClick={() => setLoginIn(!loginIn)}
               >
                 {loginIn ? "Register" : "Login"}
-              </button>
+              </button> */}
               <button
                 className="border px-4 rounded py-1 text-lg hover:bg-slate-500 hover:text-white duration-300"
                 onClick={submitHandler}
@@ -82,19 +88,7 @@ const LoginForm = () => {
             </div>
           </>
         )}
-        {currentUser && (
-          <>
-            <h1 className="w-full font-bold text-2xl md:text-4xl text-center mb-4">
-              You are logged In
-            </h1>
-            <button
-              className=" w-full border px-4 rounded py-1 text-lg hover:bg-slate-500 hover:text-white duration-300"
-              onClick={() => logout()}
-            >
-              Log Out
-            </button>
-          </>
-        )}
+        {currentUser && handleRedirect()}
       </div>
     </>
   );

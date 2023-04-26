@@ -34,10 +34,10 @@ const PostDisplayPage = () => {
             <h1 className="font-bold text-2xl md:text-4xl">{postData.title}</h1>
             <h2 className="text-gray-400">Posted: {date}</h2>
             {postData.post.split("\n").map((post) => (
-              <p>{post}</p>
+                <p className="mt-[1rem]"><span className="ml-[30px]"></span>{post}</p>
             ))}
           </div>
-          <div className="px-2 flex gap-1 flex-grow justify-center items-center">
+          <div className="px-2 flex gap-1 flex-grow justify-center items-center my-2 flex-wrap">
             Tags:
             {postData.slugs.map((slug, id) => (
               <p

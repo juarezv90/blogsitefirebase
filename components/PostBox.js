@@ -32,7 +32,7 @@ const PostBox = ({ data, refreshPage }) => {
         <h2 className="font-bold text-3xl md:text-4xl">{data.title}</h2>
         <span className="text-gray-400">Posted: {postDate}</span>
         <p className="md:w-[40ch] mb-auto whitespace-pre-line">
-          {`${data.post.substring(0, 100).replaceAll("\\n", "\n")}`}...{" "}
+          {`${data.post.substring(0, 150).replaceAll("\\n", "\n")}` + (data.post.length >= 150 ? "... " :" ")}
           <Link
             href={{
               pathname: "/PostDisplayPage",
@@ -45,7 +45,7 @@ const PostBox = ({ data, refreshPage }) => {
           </Link>
         </p>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center flex-wrap mt-4">
           Tags:
           {data.slugs.map((slug, id) => (
             <p key={id}>#{slug}</p>

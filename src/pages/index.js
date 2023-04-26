@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const postsCollection = collection(db, "posts");
   const getPosts = async () => {
     try {
@@ -20,8 +20,10 @@ export default function Home() {
   useEffect(() => {
     getPosts();
   }, []);
+
   return (
     <main className="w-full h-full">
+      {posts.length < 1 && <h1 className="text-center text-3xl mt-6">No Post to display to display yet</h1>}
       {posts !== null &&
         posts.map((element) => (
           <PostBox data={element} key={element.id} refreshPage={getPosts} />
