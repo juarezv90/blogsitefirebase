@@ -28,7 +28,7 @@ const PostDisplayPage = () => {
           <img
             src={postData.postImage}
             alt="post header"
-            className="md:rounded-md"
+            className="md:rounded-md w-full object-cover md:h-[400px] mx-auto"
           />
           <div className="w-full min-h-[200px] px-2">
             <h1 className="font-bold text-2xl md:text-4xl">{postData.title}</h1>

@@ -2,18 +2,33 @@ import { useAuth } from "@components/AuthContext";
 import { db } from "@firebaselib/firebase";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable
+} from "firebase/storage";
+import { useRouter } from "next/router";
 
 const initState = {
   post: "",
   title: "",
-  slug: [],
-  postImage: "",
+  slugs: [],
+  postImage: ""
 };
 
 const AddPost = () => {
   const [post, setPost] = useState(initState);
   const [error, setError] = useState(null);
+  const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const { currentUser } = useAuth();
+
+
+  const router = useRouter();
+  function redirect() {
+    router.push("/");
+  }
 
   const handleChange = (e) => {
     if (e.target.name == "post") {
@@ -34,19 +49,33 @@ const AddPost = () => {
   const handleSubmit = async () => {
     const docRef = collection(db, "posts");
 
-    if (post.title == "" || post.postImage == "" || post.post == "") {
+    if (post.title == "" || post.post == ""  || imageURL== null)  {
       setError("Please Check your Post is valid");
       return;
     }
+
     try {
       await addDoc(docRef, {
         ...post,
         date: Timestamp.now(),
         userId: currentUser.uid,
+        postImage: imageURL
       });
     } catch (error) {
       setError(error);
+    } finally {
+      if (!error) {
+        redirect();
+      }
     }
+  };
+
+  const handleImageUpload = async (file) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, file.name);
+    const upload = await uploadBytesResumable(storageRef, file);
+    upload;
+    setImageURL(await getDownloadURL(storageRef));
   };
 
   setTimeout(() => {
@@ -89,12 +118,15 @@ const AddPost = () => {
           className="outline-none p-1 border rounded-sm"
         />
         <input
-          type="text"
-          name="postImage"
-          onChange={(e) => handleChange(e)}
-          placeholder="Image Post URL"
-          className="outline-none p-1 border rounded-sm"
+          type="file"
+          onChange={({ target }) => {
+            setImage(target.files[0]);
+            handleImageUpload(target.files[0]);
+          }}
         />
+        {image && (
+          <img src={URL.createObjectURL(image)} alt="" className="w-[200px]" />
+        )}
         <button
           className="w-[30ch] border mx-auto p-2 rounded-md text-xl hover:bg-slate-500 hover:text-white"
           onClick={handleSubmit}

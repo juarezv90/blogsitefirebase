@@ -3,7 +3,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="w-full h-[400px] md:h-[600px] duration-300 relative grid px-4 py-[4rem]">
+    <div className="w-full h-[300px] duration-300 relative grid px-4 py-[4rem]">
       <Image
         src={"/assets/header.jpg"}
         fill
