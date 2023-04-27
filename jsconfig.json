@@ -4,7 +4,8 @@
       "@/*": ["./src/*"],
       "@firebaselib/*": ["./lib/firebase/*"],
       "@components/*": ["./components/*"],
-      "@images/*": ["./public/images/*"]
+      "@images/*": ["./public/images/*"],
+      "@context/*": ["./lib/context/*"],
     }
   }
 }

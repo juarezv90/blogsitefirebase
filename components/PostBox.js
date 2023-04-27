@@ -32,14 +32,14 @@ const PostBox = ({ data, refreshPage }) => {
         <h2 className="font-bold text-3xl md:text-4xl">{data.title}</h2>
         <span className="text-gray-400">Posted: {postDate}</span>
         <p className="md:w-[40ch] mb-auto whitespace-pre-line">
-          {`${data.post.substring(0, 150).replaceAll("\\n", "\n")}` + (data.post.length >= 150 ? "... " :" ")}
+          {`${data.post.substring(0, 150).replaceAll("\\n", "\n")}` +
+            (data.post.length >= 150 ? "... " : " ")}
           <Link
             href={{
               pathname: "/PostDisplayPage",
-              query: {id: data.id},
+              query: { id: data.id },
             }}
-
-            className="font-semibold text-slate-500"
+            className="font-semibold text-slate-500 ml-[20px] animate-pulse duration-75"
           >
             Read More
           </Link>
@@ -53,7 +53,7 @@ const PostBox = ({ data, refreshPage }) => {
         </div>
         {currentUser && (
           <BsTrashFill
-            className="ml-auto mr-5 text-xl"
+            className="ml-auto mr-5 text-xl cursor-pointer"
             onClick={() => handleDelete(data.id)}
           />
         )}

@@ -1,3 +1,4 @@
+import { useAppContext } from "@context/PostContext";
 import { db } from "@firebaselib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -8,14 +9,27 @@ const PostDisplayPage = () => {
   const router = useRouter();
   const id = router.query;
 
+  const { posts } = useAppContext();
+
   useEffect(() => {
+    if (posts.length > 0) {
+      const data = posts.filter((item) => {
+        return item.id == id.id;
+      });
+      setPostData(data[0]);
+      return;
+    }
+
+    // handle if posts are empty
     const docRef = doc(db, "posts", id.id);
     const handleGetPost = async () => {
       const postDoc = await getDoc(docRef);
       setPostData(postDoc.data());
     };
 
-    handleGetPost();
+    if (posts <= 0 || null) {
+      handleGetPost();
+    }
   }, []);
 
   let date = postData?.date.toDate();
@@ -33,8 +47,11 @@ const PostDisplayPage = () => {
           <div className="w-full min-h-[200px] px-2">
             <h1 className="font-bold text-2xl md:text-4xl">{postData.title}</h1>
             <h2 className="text-gray-400">Posted: {date}</h2>
-            {postData.post.split("\n").map((post) => (
-                <p className="mt-[1rem]"><span className="ml-[30px]"></span>{post}</p>
+            {postData.post.split("\n").map((post, id) => (
+              <p className="mt-[1rem]" key={id}>
+                <span className="ml-[30px]"></span>
+                {post}
+              </p>
             ))}
           </div>
           <div className="px-2 flex gap-1 flex-grow justify-center items-center my-2 flex-wrap">

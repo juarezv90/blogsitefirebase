@@ -9,6 +9,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useRouter } from "next/router";
+import { useAppContext } from "@context/PostContext";
 
 const initState = {
   post: "",
@@ -23,9 +24,11 @@ const AddPost = () => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const { currentUser } = useAuth();
-
+  const { setPosts } = useAppContext();
   const router = useRouter();
+
   function redirect() {
+    setPosts([]);
     router.push("/");
   }
 
