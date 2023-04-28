@@ -17,7 +17,7 @@ const Header = () => {
           <h1 className="text-3xl md:text-4xl font-bold">
             Welcome to my Developer Blog
           </h1>
-          <p className="p-4 w-[40ch] md:text-xl">
+          <p className="p-4 md:w-[40ch] md:text-xl">
             Come travel with me through my journey into development and
             programming. Watch me explore in this digital world and discuss
             feature I find pretty interesting

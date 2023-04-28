@@ -5,50 +5,33 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export const NavLinks = ({ currentUser, logout }) => {
-  const linkStyle = "relative overflow-hidden before:absolute before:h-full before:border-t before:translate-x-[110%] before:hover:-translate-x-[0%] before:w-full before:duration-300 after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300"
+  const linkStyle =
+    "relative overflow-hidden before:absolute before:h-full before:border-t before:translate-x-[110%] before:hover:-translate-x-[0%] before:w-full before:duration-300 after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300";
 
   return (
     <>
-      <Link
-        href="/"
-        className={linkStyle}
-      >
+      <Link href="/" className={linkStyle}>
         Home
       </Link>
-      <Link
-        href="/PostsPage"
-        className={linkStyle}
-      >
+      <Link href="/PostsPage" className={linkStyle}>
         Posts
       </Link>
-      <Link
-        href="/About"
-        className={linkStyle}
-      >
+      <Link href="/About" className={linkStyle}>
         About
       </Link>
       {!currentUser && (
-        <Link
-          href="/LoginForm"
-          className={linkStyle}
-        >
+        <Link href="/LoginForm" className={linkStyle}>
           Login
         </Link>
       )}
       {currentUser && (
-        <Link
-          href={"/AddPost"}
-          className={linkStyle}
-        >
+        <Link href={"/AddPost"} className={linkStyle}>
           Add Post
         </Link>
       )}
 
       {currentUser && (
-        <button
-          onClick={() => logout()}
-          className={linkStyle}
-        >
+        <button onClick={() => logout()} className={linkStyle}>
           Logout
         </button>
       )}
@@ -96,11 +79,11 @@ const NavBar = () => {
       <div
         className={
           "duration-300 w-full h-screen absolute top-0 left-0 bg-black bg-opacity-50 text-black md:hidden" +
-          (!showSideNav && " translate-x-[-100%]")
+          (!showSideNav && " translate-x-[-120%]")
         }
         onClick={() => setShowSideNav(false)}
       >
-        <div className="w-[40ch] relative h-screen bg-white flex flex-col gap-2 px-2">
+        <div className="w-[20ch] relative h-screen bg-white flex flex-col gap-2 px-2">
           <AiOutlineCloseCircle
             className="absolute top-2 right-2 z-[100] text-red-500 text-xl cursor-pointer"
             onClick={() => setShowSideNav(false)}

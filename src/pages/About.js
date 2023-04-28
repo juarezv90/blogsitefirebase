@@ -7,7 +7,6 @@ const About = () => {
     <div className="flex-1 w-full h-full max-w-[1200px] mx-auto flex flex-col relative justify-center items-center p-4">
       <img
         src="/assets/profile.webp"
-        fill
         alt="Profile Pic"
         className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] object-cover relative rounded-full mx-auto"
       />

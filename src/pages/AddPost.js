@@ -16,6 +16,7 @@ const initState = {
   title: "",
   slugs: [],
   postImage: "",
+  comments:[]
 };
 
 const AddPost = () => {
