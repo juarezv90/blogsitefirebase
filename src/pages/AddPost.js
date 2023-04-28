@@ -53,6 +53,10 @@ const AddPost = () => {
     const docRef = collection(db, "posts");
 
     if (post.title == "" || post.post == "" || imageURL == null) {
+      if(imageURL == null){
+        setError("Image required for post")
+        return;
+      }
       setError("Please Check your Post is valid");
       return;
     }
@@ -115,13 +119,19 @@ const AddPost = () => {
         <input
           type="text"
           name="slugs"
+          id="slugs"
           onChange={(e) => handleSlugs(e)}
           placeholder="Enter each tag starting with #"
           className="outline-none p-1 border rounded-sm"
         />
         <input
           type="file"
+          accept="image/*"
+          id="fileInput"
           onChange={({ target }) => {
+            if(target.files.length <=0){
+              return;
+            }
             setImage(target.files[0]);
             handleImageUpload(target.files[0]);
           }}
@@ -129,12 +139,27 @@ const AddPost = () => {
         {image && (
           <img src={URL.createObjectURL(image)} alt="" className="w-[200px]" />
         )}
+        <div className="flex w-full gap-2 mb-4 justify-center items-center">
+
         <button
-          className="w-[30ch] border mx-auto p-2 rounded-md text-xl hover:bg-slate-500 hover:text-white"
+          className="w-full md:w-[25ch] border py-2 rounded-md text-xl duration-300 hover:border-black hover:bg-slate-500 hover:text-white"
           onClick={handleSubmit}
         >
           Submit
         </button>
+        <button
+          className="w-full md:w-[25ch] border py-2 rounded-md text-xl duration-300 hover:border-black hover:bg-slate-500 hover:text-white"
+          onClick={() => {
+            setPost(initState);
+            setImage(null);
+            setImageURL(null);
+            document.getElementById('fileInput').value = "";
+            document.getElementById('slugs').value = "";
+          }}
+        >
+          Clear
+        </button>
+        </div>
       </div>
     </div>
   );

@@ -16,6 +16,8 @@ const PostDisplayPage = () => {
   const { posts } = useAppContext();
   const { setId, postComment } = useCommentContext();
 
+  const regExp = new RegExp("Posted");
+
   // handle if posts are empty
   const docRef = doc(db, "posts", id.id);
   const handleGetPost = async () => {
@@ -78,17 +80,28 @@ const PostDisplayPage = () => {
               </p>
             ))}
           </div>
-          {postData.comments.length > 0 && <div className="flex flex-col gap-2 w-full">
-            Comments:
-            {postData.comments.map((comment, id) => (
-              <div
-                key={id}
-                className="border p-2 rounded-xl whitespace-pre-line"
-              >
-                {comment.replace("Posted", "\n Posted")}
-              </div>
-            ))}
-          </div>}
+          {postData.comments.length > 0 && (
+            <div className="flex flex-col gap-2 w-full">
+              Comments:
+              {postData.comments.map((comment, id) => (
+                <div
+                  key={id}
+                  className="border p-2 rounded-xl whitespace-pre-line flex flex-col"
+                >
+                  <span>
+                    {comment.substring(0, comment.match(regExp).index)}
+                  </span>
+                  <span className="w-fit ml-auto mr-2 text-sm text-gray-400">
+                    --
+                    {comment.substring(
+                      comment.match(regExp).index,
+                      comment.length
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
           <button
             className="border w-[15ch] py-2 ml-auto rounded duration-300 relative after:absolute after:w-full after:h-full after:bg-slate-400 after:top-0 after:-left-[100%] after:hover:left-[0%] after:duration-700 overflow-hidden hover:text-white"
             onClick={() => {
