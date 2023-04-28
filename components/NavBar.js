@@ -22,7 +22,7 @@ export const NavLinks = ({ currentUser, logout }) => {
         Posts
       </Link>
       <Link
-        href="/"
+        href="/About"
         className={linkStyle}
       >
         About
