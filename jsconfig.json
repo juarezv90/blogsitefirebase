@@ -6,6 +6,7 @@
       "@components/*": ["./components/*"],
       "@images/*": ["./public/images/*"],
       "@context/*": ["./lib/context/*"],
+      "@modules/*": ["./lib/modules/*"]
     }
   }
 }

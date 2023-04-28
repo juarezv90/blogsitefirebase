@@ -1,40 +1,43 @@
 import { useCommentContext } from "@context/CommentContext";
 import { useAppContext } from "@context/PostContext";
 import { db } from "@firebaselib/firebase";
+import { getDate, postDate } from "@modules/dateModules";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const PostDisplayPage = () => {
   const [postData, setPostData] = useState(null);
-  const [comment, setComment] = useState("");
   const [addComment, setAddComment] = useState(false);
+
+  //TODO: needs to move to separate component
   const [todayDate, setTodayDate] = useState("");
+  const [comment, setComment] = useState("");
+
+  //USING ROUTER FOR GETTING DOCUMENT ID
+  //USED IF CLIENT REFRESHES PAGE
   const router = useRouter();
   const id = router.query;
 
+  //CONTEXT IMPORTS USED THROUGHOUT PROGRAM
   const { posts } = useAppContext();
   const { setId, postComment } = useCommentContext();
 
   const regExp = new RegExp("Posted");
 
-  // handle if posts are empty
+  //USED TO LOAD POST IF PAGE IS REFRESHED
+  //ELSE PAGE SHOULD ALREADY BE LOADED FROM HOMEPAGE LOAD
   const docRef = doc(db, "posts", id.id);
   const handleGetPost = async () => {
     const postDoc = await getDoc(docRef);
     setPostData(postDoc.data());
   };
 
-  const getDate = () => {
-    let todayDate = new Date(Date.now());
-    todayDate = ` Posted on ${
-      todayDate.getMonth() + 1
-    }/${todayDate.getDate()}/${todayDate.getFullYear()} at ${todayDate.getHours()}:${todayDate.getSeconds()}`;
-    return todayDate;
-  };
-
+  //USE EFFECT WILL EITHER GET THE POST FROM THE LOADED
+  //POST OR WILL RETRIEVE THE POST BASE ON THE QUERY ID
   useEffect(() => {
-    if (posts.length > 0) {
+
+    if (posts.length > 0) {//THIS VERIFIES THAT THERE IS DATA IN THE POST
       const data = posts.filter((item) => {
         return item.id == id.id;
       });
@@ -47,9 +50,6 @@ const PostDisplayPage = () => {
     }
   }, []);
 
-  let date = postData?.date.toDate();
-  date =
-    date?.getMonth() + 1 + "/" + date?.getDate() + "/" + date?.getFullYear();
   return (
     <div className="w-full pt-2 md:p-2 mb-5">
       {postData && (
@@ -61,7 +61,7 @@ const PostDisplayPage = () => {
           />
           <div className="w-full min-h-[200px] px-2 mb-10">
             <h1 className="font-bold text-2xl md:text-4xl">{postData.title}</h1>
-            <h2 className="text-gray-400">Posted: {date}</h2>
+            <h2 className="text-gray-400">Posted: {postDate(postData)}</h2>
             {postData.post.split("\n").map((post, id) => (
               <p className="mt-[1rem]" key={id}>
                 <span className="ml-[30px]"></span>
@@ -106,7 +106,7 @@ const PostDisplayPage = () => {
             className="border w-[15ch] py-2 ml-auto rounded duration-300 relative after:absolute after:w-full after:h-full after:bg-slate-400 after:top-0 after:-left-[100%] after:hover:left-[0%] after:duration-700 overflow-hidden hover:text-white"
             onClick={() => {
               setAddComment(true);
-              setTodayDate(getDate);
+              setTodayDate(getDate());
               setId(postData.id);
             }}
           >
