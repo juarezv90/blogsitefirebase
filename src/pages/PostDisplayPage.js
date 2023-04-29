@@ -57,10 +57,10 @@ const PostDisplayPage = () => {
           <img
             src={postData.postImage}
             alt="post header"
-            className="md:rounded-md w-full object-cover md:h-[400px] mx-auto"
+            className="md:rounded-md w-full object-cover md:h-[400px] mx-auto shadow-slate-500 shadow-lg"
           />
           <div className="w-full min-h-[200px] px-2 mb-10">
-            <h1 className="font-bold text-2xl md:text-4xl">{postData.title}</h1>
+            <h1 className="font-bold text-2xl md:text-4xl mt-2">{postData.title}</h1>
             <h2 className="text-gray-400">Posted: {postDate(postData)}</h2>
             {postData.post.split("\n").map((post, id) => (
               <p className="mt-[1rem]" key={id}>

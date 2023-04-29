@@ -7,7 +7,7 @@ import React from "react";
 
 const Layout = ({ children }) => {
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-screen flex flex-col min-w-[380px]">
       <SEO pageTitle={"Juarez Development Blog"} pageDescription={"A site dedicated to sharing my experiences in switching careers and growing in the programming field."} />
       <NavBar />
       <Header />

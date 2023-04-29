@@ -1,7 +1,7 @@
+import Loading from "@components/Loading";
 import PostBox from "@components/PostBox";
 import { useAppContext } from "@context/PostContext";
 import { useEffect } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
 
 export default function Home() {
   const { posts, getPosts, loading } = useAppContext();
@@ -15,10 +15,7 @@ export default function Home() {
   return (
     <main className="w-full h-full">
         {loading && (
-          <div className="text-black w-full flex flex-col justify-center items-center mt-4">
-            <AiOutlineLoading className="text-4xl font-bold animate-spin" />
-            <h1 className="text-xl">loading...</h1>
-          </div>
+          <Loading />
         )}
         {posts.length < 1 && (
           <h1 className="text-center text-3xl mt-6">
@@ -28,7 +25,7 @@ export default function Home() {
         {posts.length > 0 &&
           posts
             .sort(function (a, b) {
-              return a.date - b.date;
+              return b.date - a.date;
             })
             .map((element) => (
               <PostBox data={element} key={element.id} refreshPage={getPosts} />

@@ -3,41 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-
-export const NavLinks = ({ currentUser, logout }) => {
-  const linkStyle =
-    "relative overflow-hidden before:absolute before:h-full before:border-t before:translate-x-[110%] before:hover:-translate-x-[0%] before:w-full before:duration-300 after:absolute after:border-b after:w-full after:h-full after:top-0 after:left-0 after:translate-x-[-110%] after:hover:translate-x-[0%] after:duration-300";
-
-  return (
-    <>
-      <Link href="/" className={linkStyle}>
-        Home
-      </Link>
-      <Link href="/PostsPage" className={linkStyle}>
-        Posts
-      </Link>
-      <Link href="/About" className={linkStyle}>
-        About
-      </Link>
-      {!currentUser && (
-        <Link href="/LoginForm" className={linkStyle}>
-          Login
-        </Link>
-      )}
-      {currentUser && (
-        <Link href={"/AddPost"} className={linkStyle}>
-          Add Post
-        </Link>
-      )}
-
-      {currentUser && (
-        <button onClick={() => logout()} className={linkStyle}>
-          Logout
-        </button>
-      )}
-    </>
-  );
-};
+import { NavLinks } from "./NavLinks";
 
 const NavBar = () => {
   const [navBar, setNavBar] = useState(false);
@@ -63,12 +29,12 @@ const NavBar = () => {
         navBar
           ? "w-full top-0 left-0 py-2 px-10 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] fixed bg-slate-800 duration-300"
           : "w-full top-0 left-0 py-2 px-10 flex justify-stretch items-center text-white border-b border-slate-500 z-[100] absolute duration-300"
-      }
+       + " min-w-[380px]"}
     >
-      <h1 className="font-bold text-xl md:inline-flex md:text-3xl">
+      <h1 className="font-bold text-lg sm:text-xl md:inline-flex md:text-2xl">
         Juarez Development Blog
       </h1>
-      <ul className="md:gap-8 ml-auto hidden md:flex">
+      <ul className="md:gap-4 lg:gap-8 ml-auto hidden md:flex">
         <NavLinks currentUser={currentUser} logout={logout} />
       </ul>
 

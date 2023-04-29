@@ -12,12 +12,12 @@ const Header = () => {
         alt="Blog Header"
       />
       <div className="absolute top-0 left-0 w-full h-full from-black to-slate-400 bg-gradient-to-b opacity-50"></div>
-      <div className="w-full h-full z-50 grid md:grid-cols-2 content-center text-white">
+      <div className="w-full h-full z-50 grid lg:grid-cols-2 content-center text-white">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-3xl md:text-4xl font-bold">
+          <h1 className="text-2xl text-center md:text-4xl font-bold">
             Welcome to my Developer Blog
           </h1>
-          <p className="p-4 md:w-[40ch] md:text-xl">
+          <p className="p-4 md:w-[40ch] md:text-base">
             Come travel with me through my journey into development and
             programming. Watch me explore in this digital world and discuss
             feature I find pretty interesting

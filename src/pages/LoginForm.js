@@ -1,53 +1,19 @@
 import { useAuth } from "@components/AuthContext";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { loginModule } from "@modules/login.module";
+import React from "react";
 
 const LoginForm = () => {
-  const [loginIn, setLoginIn] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const {
+    error,
+    loginIn,
+    setEmail,
+    setPassword,
+    submitHandler,
+    email,
+    password
+  } = loginModule();
 
-  const { login, signUp, currentUser, logout } = useAuth();
-
-  const router = useRouter();
-  const handleRedirect = () => {
-    router.push("/");
-  };
-
-  async function submitHandler() {
-    if (!email || !password) {
-      setError("Please enter email and password");
-      return;
-    }
-
-    if (loginIn) {
-      try {
-        await login(email, password);
-        setError(null);
-      } catch (err) {
-        setError("User Email or Password incorrect");
-      } finally {
-        if (error === null) {
-          setEmail("");
-          setPassword("");
-        }
-      }
-      return;
-    }
-
-    try {
-      await signUp(email, password);
-      setError(null);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      if (error === null) {
-        setEmail("");
-        setPassword("");
-      }
-    }
-  }
+  const {currentUser } = useAuth();
 
   return (
     <>
@@ -88,7 +54,6 @@ const LoginForm = () => {
             </div>
           </>
         )}
-        {currentUser && handleRedirect()}
       </div>
     </>
   );
